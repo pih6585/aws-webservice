@@ -1,11 +1,14 @@
 package com.pih6585.aws.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.pih6585.aws.config.auth.dto.SessionUser;
 import com.pih6585.aws.service.posts.PostsService;
 import com.pih6585.aws.web.dto.PostsResponseDto;
 
@@ -15,12 +18,17 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class IndexController {
 
-	@Autowired
-	private PostsService postsService;
+	private final PostsService postsService;
+	private final HttpSession httpSession;
 
 	@GetMapping("/")
 	public String index(Model model) {
 		model.addAttribute("posts", postsService.findAllDesc());
+
+		SessionUser user = (SessionUser)httpSession.getAttribute("user");
+		if (user != null) {
+			model.addAttribute("userName", user.getName());
+		}
 		return "index";
 	}
 

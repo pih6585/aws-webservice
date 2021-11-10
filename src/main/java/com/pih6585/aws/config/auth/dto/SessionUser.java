@@ -6,7 +6,6 @@ import java.io.Serializable;
 import com.pih6585.aws.domain.user.User;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class SessionUser implements Serializable {

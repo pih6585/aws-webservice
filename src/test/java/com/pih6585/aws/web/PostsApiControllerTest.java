@@ -35,9 +35,6 @@ class PostsApiControllerTest {
 	private int port;
 
 	@Autowired
-	private TestRestTemplate restTemplate;
-
-	@Autowired
 	private PostsRepository postsRepository;
 
 	@Autowired
